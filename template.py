@@ -1,6 +1,7 @@
 from collections import *
 import math
 
+
 def collect_input(filename):
 	with open(filename) as inputfile:
 		data = inputfile.read()
