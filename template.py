@@ -1,5 +1,6 @@
 from collections import *
 import math
+import numpy as np
 
 
 def collect_input(filename):
