@@ -1,6 +1,7 @@
 from collections import *
 import math
 import numpy as np
+from timeit import default_timer as timer
 
 
 def collect_input(filename):
@@ -24,8 +25,13 @@ data = collect_input("input.txt")
 #data = [int(x) for x in data.split('\n')]
 #data = [x for x in data.split('\n')]
 
+start = timer()
+
 # Part 1
 print(part1(data.copy()))
 
 # Part 2
 print(part2(data.copy()))
+
+end = timer()
+print("\nTime elapsed: {:.3}s".format(end - start))
