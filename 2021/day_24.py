@@ -2,7 +2,6 @@ from collections import *
 import math
 from timeit import default_timer as timer
 import itertools
-import re
 
 
 def collect_input(filename):
