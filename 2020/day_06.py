@@ -15,26 +15,17 @@ def collect_input(filename):
 
 
 def part1(x):
-	ans = 0 
-
-	for a in x:
-		a = a.replace("\n", "")
-		ans += len(list(set(a)))
-
-	return ans
+	return sum([len(list(set(a.replace("\n", "")))) for a in x])
 
 
 def part2(x):
 	ans = 0 
 
 	for group in x:
-		all_answers = group.replace("\n", "")
 		lines = group.split("\n")
 		group_size = len(lines)
 
-		for question in lines[0]:
-			if all_answers.count(question) == group_size:
-				ans += 1
+		ans += sum([group.count(question) == group_size for question in lines[0]])
 
 	return ans
 
