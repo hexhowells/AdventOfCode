@@ -19,8 +19,7 @@ def part1(x):
 
 	for a in x:
 		a = a.replace("\n", "")
-		a = list(set(a))
-		ans += len(a)
+		ans += len(list(set(a)))
 
 	return ans
 
