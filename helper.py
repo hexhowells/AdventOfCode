@@ -53,7 +53,7 @@ class Grid:
 		neighbour_cells = [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]
 
 		if diag:
-			neighbour_cells.append([(r-1, c-1), (r-1, c+1), (r+1, c-1), (r+1, c+1)])
+			neighbour_cells.extend([(r-1, c-1), (r-1, c+1), (r+1, c-1), (r+1, c+1)])
 
 		n = []
 		for (r, c) in neighbour_cells:
