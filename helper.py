@@ -77,6 +77,10 @@ class Grid:
 				yield (r, c)
 
 
+	def count(self, symbol):
+		return sum([line.count(symbol) for line in self.grid])
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
