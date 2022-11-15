@@ -44,6 +44,10 @@ class Grid:
 				yield self.grid[r][c]
 
 
+	def __str__(self):
+		return '\n'.join([''.join(line) for line in self.grid])
+
+
 	def get_neighbour_coords(self, point, diag=False):
 		(r, c) = point
 		neighbour_cells = [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]
@@ -69,7 +73,7 @@ class Grid:
 
 	def all_points(self):
 		for r in range(self.height):
-			for c in range(self.height):
+			for c in range(self.width):
 				yield (r, c)
 
 
