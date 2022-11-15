@@ -58,7 +58,7 @@ class Grid:
 
 		n = []
 		for (r, c) in neighbour_cells:
-			if (0 <= r < self.height) and (0 <= c < self.width):
+			if self.valid(r, c):
 				n.append((r, c))
 
 		return n
