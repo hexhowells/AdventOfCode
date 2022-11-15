@@ -81,6 +81,11 @@ class Grid:
 		return sum([line.count(symbol) for line in self.grid])
 
 
+	def valid(self, r, c):
+		return (0 <= r < self.height) and (0 <= c < self.width)
+
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
