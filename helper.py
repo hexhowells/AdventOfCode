@@ -28,7 +28,8 @@ def create_grid(x):
 
 
 class Grid:
-	def __init__(self, x, cell_type=int):
+	def __init__(self, x, cell_type=None):
+		if not cell_type: cell_type = type(x[0][0])
 		self.grid = [[cell_type(a) for a in list(line)] for line in x]
 		self.height = len(self.grid)
 		self.width = len(self.grid[0])
