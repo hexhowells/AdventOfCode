@@ -29,7 +29,14 @@ def part1(x):
 
 
 def part2(x):
-	return "Part 2 Empty"
+	times = [int(a) for a in x[1].replace('x', '1').split(",")]
+	time, incr = 0, 1
+	for i, bus in enumerate(times):
+		while (time + i) % bus:
+			time += incr
+		incr *= bus
+
+	return time
 
 
 data = collect_input("input.txt")
