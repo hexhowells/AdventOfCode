@@ -25,6 +25,7 @@ def part2(x):
 data = collect_input("input.txt")
 #data = collect_input("test_input.txt")
 
+#data = [x for x in data.split('\n\n')]
 data = [x for x in data.split('\n')]
 #data = [int(x) for x in data.split('\n')]
 
