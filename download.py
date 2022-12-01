@@ -30,9 +30,13 @@ def main(args):
 
 	url = "https://adventofcode.com/{}/day/{}/input".format(args['y'], args['d'])
 	cookie = get_cookie()
-	session_cookie = {"session": cookie}
+	request_header = {
+		"session": cookie,
+		"User-Agent": "https://github.com/hexhowells/AdventOfCode",
+		"From": "hexhowells@gmail.com"
+		}
 	
-	data = get_input(url, session_cookie).decode('utf-8')
+	data = get_input(url, request_header).decode('utf-8')
 
 	dest_filepath = "{}/Day{}/input.txt".format(args['y'], args['d'])
 	save_to_file(dest_filepath, data)
