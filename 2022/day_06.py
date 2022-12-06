@@ -16,7 +16,7 @@ def collect_input(filename):
 
 def solve(x, length):
 	for i in range(length, len(x)):
-		if len(x[i-length:i]) == len(set(x[i-length:i])):
+		if len(set(x[i-length:i])) == length:
 			return i
 
 
