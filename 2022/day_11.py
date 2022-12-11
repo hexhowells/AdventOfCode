@@ -71,7 +71,6 @@ def part1(x):
 	return a * b
 
 
-
 def part2(x):
 	monkeys = parse_monkeys(x)
 	mod_test = math.prod([m.test for m in monkeys.values()])
