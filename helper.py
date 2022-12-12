@@ -86,6 +86,10 @@ class Grid:
 		return (0 <= r < self.height) and (0 <= c < self.width)
 
 
+	def get(self, point):
+		(r, c) = point
+		return self.grid[r][c]
+
 
 def triangle(n):
 	return n * (n + 1) // 2
