@@ -41,13 +41,15 @@ def BFS(grid, start, end_char, condition):
 					steps[n] = steps[v] + 1
 
 
+def find_start(grid, start):
+	for r, c in grid.all_points():
+		if grid[r][c] == start:
+			return (r, c)
+
+
 def part1(x):
 	grid = aoc.Grid(x)
-	start = (0, 0)
-	
-	for r, c in grid.all_points():
-		if grid[r][c] == "S": start = (r, c)
-	
+	start = find_start(grid, "S")
 	length = BFS(grid, start, "E", lambda a, b: a - b <= 1)
 
 	return length
@@ -55,11 +57,7 @@ def part1(x):
 
 def part2(x):
 	grid = aoc.Grid(x)
-	start = (0, 0)
-	
-	for r, c in grid.all_points():
-		if grid[r][c] == "E": start = (r, c)
-	
+	start = find_start(grid, "E")
 	length = BFS(grid, start, "a", lambda a, b: b - a <= 1)
 
 	return length
