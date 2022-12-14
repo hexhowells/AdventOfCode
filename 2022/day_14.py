@@ -47,19 +47,16 @@ def simulate(x, part1):
 	path = [start]
 
 	while True:
-		grain_stopped = True
 		grain = path[-1]
-
 		# try to move sand grain
 		for acc in [[1, 0], [1, -1], [1, 1]]:
 			new_grain = (grain[0] + acc[0], grain[1] + acc[1])
 			if (new_grain not in sand) and (not in_wall(new_grain, wall, floor+2)):
 				path.append(new_grain)
-				grain_stopped = False
 				break
+		else:
+			sand.add(path.pop())
 
-		if grain_stopped: sand.add(path.pop())
-	
 		# check to terminate simulation
 		if part1 and grain[0] >= floor: break
 		if not part1 and start in sand: break
