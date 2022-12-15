@@ -1,6 +1,6 @@
 from collections import *
 import math
-import numpy as np
+#import numpy as np
 from timeit import default_timer as timer
 import itertools
 import pyperclip
