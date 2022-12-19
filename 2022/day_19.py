@@ -20,7 +20,7 @@ def simulate(blueprint, mins):
 
     # ore, clay, obsidian, geodes, ore_robot, clay_robot, obsidian_robot, geode_robot, time
     q = deque([(0, 0, 0, 0, 1, 0, 0, 0, mins)])
-    seen = set()
+    seen = {}
 
     # unpack blueprint
     ore_cost = blueprint['ore']
@@ -53,11 +53,11 @@ def simulate(blueprint, mins):
         clay =     min( clay,     t * obsidian_clay_cost  - clay_r     * (t-1) )
         obsidian = min( obsidian, t * geode_obsidian_cost - obsidian_r * (t-1) )
 
-        state = (ore, clay, obsidian, geode, ore_r, clay_r, obsidian_r, geode_r, t)
+        state = (ore, clay, obsidian, geode, ore_r, clay_r, obsidian_r, geode_r)
 
         # terminate branch if already explored
-        if state in seen: continue
-        seen.add(state)
+        if (state in seen) and (t <= seen[state]): continue
+        seen[state] = t
 
         # store material quantities before mining more
         prev_ore, prev_clay, prev_obsidian = ore, clay, obsidian
