@@ -23,12 +23,12 @@ def simulate(blueprint, mins):
     seen = {}
 
     # unpack blueprint
-    ore_cost = blueprint['ore']
-    clay_cost = blueprint['clay']
-    obsidian_ore_cost = blueprint['obsidian'][0]
-    obsidian_clay_cost = blueprint['obsidian'][1]
-    geode_ore_cost = blueprint['geode'][0]
-    geode_obsidian_cost = blueprint['geode'][1]
+    ore_cost = blueprint[0]
+    clay_cost = blueprint[1]
+    obsidian_ore_cost = blueprint[2]
+    obsidian_clay_cost = blueprint[3]
+    geode_ore_cost = blueprint[4]
+    geode_obsidian_cost = blueprint[5]
 
     # most amount of ore we could spend in one turn
     max_ore_spend = max([ore_cost, clay_cost, obsidian_ore_cost, geode_ore_cost])
@@ -80,24 +80,11 @@ def simulate(blueprint, mins):
     return best
 
 
-def process_blueprints(x):
-    blueprints = []
-    for blueprint in x:
-        b = {}
-        lines = blueprint.replace(':', '.').split(".")
-        b['ore'] = aoc.ints(lines[1])[0]
-        b['clay'] = aoc.ints(lines[2])[0]
-        b['obsidian'] = aoc.ints(lines[3])
-        b['geode'] = aoc.ints(lines[4])
-        blueprints.append(b)
-    return blueprints
-
-
 # for each blueprint find best geode
 #   for each minute perform every possible action and add to queue
 #     do above until time runs out, return most geodes found for all branches
 def solve(x):
-    blueprints = process_blueprints(x)
+    blueprints = [aoc.ints(b)[1:] for b in x]
 
     part1, part2 = 0, 1
     for i, blueprint in tqdm(enumerate(blueprints), total=len(blueprints)):
