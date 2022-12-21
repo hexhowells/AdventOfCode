@@ -30,7 +30,7 @@ def solve(name, mem, yell, part2=True):
 			return mem[name][0]
 
 	num1, op, num2 = mem[name]
-	return int( eval(f'{solve(num1, mem, yell, part2)} {op} {solve(num2, mem, yell, part2)}') )
+	return eval(f'{solve(num1, mem, yell, part2)} {op} {solve(num2, mem, yell, part2)}')
 
 
 def part1(x):
@@ -47,7 +47,7 @@ def part1(x):
 
 	num1, op, num2 = mem["root"]
 
-	return eval(f'{solve1(num1, mem)} {op} {solve1(num2, mem)}')
+	return int( eval(f'{solve1(num1, mem)} {op} {solve1(num2, mem)}') )
 
 
 def find_start(num1, tar, mem, start, acc, op):
