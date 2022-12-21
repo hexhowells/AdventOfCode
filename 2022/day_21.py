@@ -14,23 +14,10 @@ def collect_input(filename):
 	return data.rstrip()
 
 
-def solve1(name, mem):
-	if isinstance(mem[name][0], int):
-		return mem[name][0]
-
+def solve(name, mem):
+	if isinstance(mem[name][0], int): return mem[name][0]
 	num1, op, num2 = mem[name]
-	return eval(f'{solve1(num1, mem)} {op} {solve1(num2, mem)}')
-
-
-def solve(name, mem, yell, part2=True):
-	if isinstance(mem[name][0], int):
-		if part1 and name == 'humn':
-			return yell
-		else:
-			return mem[name][0]
-
-	num1, op, num2 = mem[name]
-	return eval(f'{solve(num1, mem, yell, part2)} {op} {solve(num2, mem, yell, part2)}')
+	return eval(f'{solve(num1, mem)} {op} {solve(num2, mem)}')
 
 
 def part1(x):
@@ -47,7 +34,7 @@ def part1(x):
 
 	num1, op, num2 = mem["root"]
 
-	return int( eval(f'{solve1(num1, mem)} {op} {solve1(num2, mem)}') )
+	return int( eval(f'{solve(num1, mem)} {op} {solve(num2, mem)}') )
 
 
 def find_start(num1, tar, mem, start, acc, op):
@@ -55,15 +42,13 @@ def find_start(num1, tar, mem, start, acc, op):
 	prev = yell
 
 	while True:
-		ans1 = solve(num1, mem, yell)
-		if ans1 == tar:
-			return True, yell
-		if (ans1 - tar) < 0:
-			return False, prev
-
+		mem['humn'] = [yell]
+		ans1 = solve(num1, mem)
+		
+		if ans1 == tar: return True, yell
+		if (ans1 - tar) < 0: return False, prev
 		prev = yell
 		yell = eval(f'{yell} {op} {acc}')
-
 
 
 def part2(x):
@@ -80,7 +65,7 @@ def part2(x):
 
 	num1, op, num2 = mem["root"]
 
-	target = solve(num2, mem, 0)
+	target = solve(num2, mem)
 	_, start = find_start(num1, target, mem, 1, 10, "*")
 	zeros = len(str(start)) - 3
 	acc = int("1" + ("0" * zeros))
@@ -93,18 +78,11 @@ def part2(x):
 		found, start = find_start(num1, target, mem, start, acc, "+")
 		
 		if found: return start
-
-		if start == prev_start:
-			sub += 1
+		if start == prev_start: sub += 1
 
 		zeros = len(str(start)) - sub
-		acc = int("1" + ("0" * zeros))
-		acc = max(1, acc)
-
+		acc = max(1, int("1" + ("0" * zeros)))
 		prev_start = start
-
-
-	return -1
 
 
 data = collect_input("input.txt")
