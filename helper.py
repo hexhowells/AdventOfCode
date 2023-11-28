@@ -69,5 +69,9 @@ def triangle(n):
 	return n * (n + 1) // 2
 
 
+acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+acc_3d = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
+
+
 def ints(x):
 	return [int(num) for num in re.findall("[-\d]+", x)]
