@@ -46,6 +46,16 @@ class Grid:
 		return cells
 
 
+	def subgrid(self, x1, y1, x2, y2):
+		return [row[y1:y2+1] for row in self.grid[x1:x2+1]]
+
+
+	def cells_in_subgrid(self, x1, y1, x2, y2):
+		for r in range(x1, x2+1):
+			for c in range(y1, y2+1):
+				yield self.grid[r][c]
+
+
 	def all_points(self):
 		for r in range(self.height):
 			for c in range(self.width):
