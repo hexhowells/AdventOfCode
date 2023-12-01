@@ -15,30 +15,18 @@ def collect_input(filename):
 
 
 def part1(x):
-	ans = 0
-
-	for line in x:
-		ints = aoc.ints(line)
-		ans += int(str(ints[0])[0] + str(ints[-1])[-1])
-
-	return ans
+    return sum([(lambda d: d[0]*10 + d[-1])(aoc.digits(line)) for line in x])
 
 
 def convert(line):
-	for i, digit in enumerate(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']):
-		line = line.replace(digit, digit[0] + str(i+1) + digit[-1])
+    for i, digit in enumerate(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']):
+        line = line.replace(digit, digit[0] + str(i+1) + digit[-1])
 
-	return line
+    return line
 
 
 def part2(x):
-	ans = 0
-
-	for line in x:
-		ints = aoc.ints(convert(line))
-		ans += int(str(ints[0])[0] + str(ints[-1])[-1])
-
-	return ans
+    return sum([(lambda d: d[0]*10 + d[-1])(aoc.digits(convert(line))) for line in x])
 
 
 data = collect_input("input.txt")
