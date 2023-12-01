@@ -7,13 +7,6 @@ import pyperclip
 import aoc
 
 
-def collect_input(filename):
-	with open(filename) as inputfile:
-		data = inputfile.read()
-
-	return data.rstrip()
-
-
 def part1(x):
     return sum([(lambda d: d[0]*10 + d[-1])(aoc.digits(line)) for line in x])
 
@@ -29,7 +22,7 @@ def part2(x):
     return sum([(lambda d: d[0]*10 + d[-1])(aoc.digits(convert(line))) for line in x])
 
 
-data = collect_input("input.txt")
+data = aoc.collect_input("input.txt")
 #data = collect_input("test_input.txt")
 
 data = list(map(str, data.split('\n')))

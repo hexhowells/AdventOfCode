@@ -1,6 +1,12 @@
 import re
 
 
+def collect_input(filename):
+	with open(filename) as inputfile:
+		data = inputfile.read()
+
+	return data.rstrip()
+
 class Grid:
 	def __init__(self, x, cell_type=None):
 		if not cell_type: cell_type = type(x[0][0])
