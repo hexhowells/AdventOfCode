@@ -79,6 +79,18 @@ def triangle(n):
 	return n * (n + 1) // 2
 
 
+def add_tuples(a, b):
+	return tuple( [a[i] + b[i] for i in range(len(a))] )
+
+
+def sub_tuples(a, b):
+	return tuple( [a[i] - b[i] for i in range(len(a))] )
+
+
+def mul_tuples(a, b):
+	return tuple( [a[i] * b[i] for i in range(len(a))] )
+
+	
 acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 acc_3d = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
 
