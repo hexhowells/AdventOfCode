@@ -23,7 +23,7 @@ def part2(x):
 
 
 data = aoc.collect_input("input.txt")
-#data = collect_input("test_input.txt")
+#data = aoc.collect_input("test_input.txt")
 
 data = list(map(str, data.split('\n')))
 
