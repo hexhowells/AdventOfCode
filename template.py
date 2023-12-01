@@ -7,13 +7,6 @@ import pyperclip
 import aoc
 
 
-def collect_input(filename):
-	with open(filename) as inputfile:
-		data = inputfile.read()
-
-	return data.rstrip()
-
-
 def part1(x):
 	return "Part 1 Empty"
 
@@ -22,8 +15,8 @@ def part2(x):
 	return "Part 2 Empty"
 
 
-data = collect_input("input.txt")
-#data = collect_input("test_input.txt")
+data = aoc.collect_input("input.txt")
+#data = aoc.collect_input("test_input.txt")
 
 data = list(map(str, data.split('\n')))
 
