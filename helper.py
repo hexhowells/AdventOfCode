@@ -85,3 +85,10 @@ acc_3d = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
 
 def ints(x):
 	return [int(num) for num in re.findall("[-\d]+", x)]
+
+
+def digits(x, neg=False):
+	if neg:
+		return [int(num) for num in re.findall("-?\d", x)]
+	else:
+		return [int(num) for num in re.findall("\d", x)]
