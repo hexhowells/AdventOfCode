@@ -7,7 +7,7 @@ import pyperclip
 import aoc
 
 
-score = lambda w, n: sum([nn in w for nn in n])
+points = lambda w, n: sum([nn in w for nn in n])
 get_card = lambda line: [aoc.ints(a) for a in line.replace(':', '|').split('|')]
 
 
@@ -16,18 +16,18 @@ def part1(x):
 
 	for line in x:
 		card, winners, nums = get_card(line)
-		s = score(winners, nums)
+		s = points(winners, nums)
 		ans += (s>0) * (2**(s-1))
 
 	return int(ans)
 
 
-def rec(tickets, card, mem):
+def get_num_cards(scratchcards, card, mem):
 	ans = 1
 	if card in mem: return mem[card]
 	
-	if (s:= score(*tickets[card])) > 0:
-		ans += sum(rec(tickets, card+i, mem) for i in range(1, s+1))
+	if (s:= points(*scratchcards[card])) > 0:
+		ans += sum(get_num_cards(scratchcards, card+i, mem) for i in range(1, s+1))
 
 	mem[card] = ans
 
@@ -36,16 +36,16 @@ def rec(tickets, card, mem):
 
 def part2(x):
 	ans = 0
-	tickets = {}
+	scratchcards = {}
 	mem = {}
 
 	for line in x:
 		card, winners, nums = get_card(line)
-		tickets[card[0]] = (winners, nums)
+		scratchcards[card[0]] = (winners, nums)
 
-	for card, (winners, nums) in tickets.items():
-		if (s:= score(winners, nums)) > 0:
-			ans += sum(rec(tickets, card+i, mem) for i in range(1, s+1))
+	for card, (winners, nums) in scratchcards.items():
+		if (s:= points(winners, nums)) > 0:
+			ans += sum(get_num_cards(scratchcards, card+i, mem) for i in range(1, s+1))
 
 	return ans + len(x)
 
