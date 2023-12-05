@@ -5,7 +5,6 @@ from timeit import default_timer as timer
 import itertools
 import pyperclip
 import aoc
-from tqdm import tqdm
 
 
 def get_maps(x):
