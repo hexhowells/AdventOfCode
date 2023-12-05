@@ -34,7 +34,7 @@ def map_ranges(ranges, maps):
 		start, end = ranges.pop()
 
 		for a, b, diff in maps:
-			if a <= start <= b:  # does the start of the range overlaps a map?
+			if a <= start <= b:  # does the start of the range overlap a map?
 				if end <= b:  # does the end of the range also overlap the map?
 					new_ranges.append([start-diff, end-diff])
 				else:
