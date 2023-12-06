@@ -7,19 +7,24 @@ import pyperclip
 import aoc
 
 
+def get_wins(t, d):
+	high = math.ceil((-t - math.sqrt(t**2 - 4 * -1 * -d)) / (-2))
+	low = math.floor((-t + math.sqrt(t**2 - 4 * -1 * -d)) / (-2))
+	
+	return (high - 1) - low
+
+
 def part1(x):
 	times = aoc.ints(x[0])
 	dists = aoc.ints(x[1])
-
-	return math.prod( sum([((t - i) * i) > d for i in range(t)]) for t, d in zip(times, dists))
+	return math.prod([get_wins(t, d) for t, d in zip(times, dists)])
 
 
 def part2(x):
-	t = int(''.join( list(map(str, aoc.ints(x[0]))) ))
-	d = int(''.join( list(map(str, aoc.ints(x[1]))) ))
-
-	return math.prod( [sum([((t - i) * i) > d for i in range(t)])] )
-
+	t = int( ''.join(x[0].split()[1:]) )
+	d = int( ''.join(x[1].split()[1:]) )
+	return get_wins(t, d)
+	
 
 data = aoc.collect_input("input.txt")
 #data = aoc.collect_input("test_input.txt")
