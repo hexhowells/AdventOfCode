@@ -7,12 +7,6 @@ import pyperclip
 import aoc
 
 
-def find_start(grid):
-	for (r, c) in grid.all_points():
-		if grid[r][c] == 'S':
-			return (r, c)
-
-
 def get_start_symbol(grid, point):
 	(r, c) = point
 	cart = {
@@ -142,8 +136,8 @@ def flood_fill(grid, point):
 
 def part1(x):
 	grid = aoc.Grid(x)
-	
-	start = find_start(grid)
+
+	start = grid.find('S')[0]
 	start_symbol = get_start_symbol(grid, start)
 	grid.set(start, start_symbol)
 	
@@ -156,10 +150,10 @@ def part2(x):
 	grid = aoc.Grid(x)
 
 	# find and replace start symbol with correct pipe
-	start = find_start(grid)
+	start = grid.find('S')[0]
 	start_symbol = get_start_symbol(grid, start)
 	grid.set(start, start_symbol)
-
+	
 	# find path and replace all non-path symbols with '.'
 	_, path = BFS(grid, start)
 
