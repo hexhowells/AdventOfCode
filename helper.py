@@ -7,6 +7,7 @@ def collect_input(filename):
 
 	return data.rstrip()
 
+
 class Grid:
 	def __init__(self, x, cell_type=None):
 		if not cell_type: cell_type = type(x[0][0])
@@ -79,6 +80,11 @@ class Grid:
 	def get(self, point):
 		(r, c) = point
 		return self.grid[r][c]
+
+
+	def set(self, point, symbol):
+		(r, c) = point
+		self.grid[r][c] = symbol
 
 
 def triangle(n):
