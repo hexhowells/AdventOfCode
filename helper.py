@@ -87,6 +87,10 @@ class Grid:
 		self.grid[r][c] = symbol
 
 
+	def find(self, symbol):
+		return [(r, c) for (r, c) in self.all_points() if self.grid[r][c] == symbol]
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
