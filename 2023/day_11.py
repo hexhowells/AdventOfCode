@@ -11,19 +11,16 @@ def expand(galaxies, expand_factor):
 	y_coords = set([a[0] for a in galaxies])
 	x_coords = set([a[1] for a in galaxies])
 
-	y_rules = set(range(max(y_coords))) - y_coords
-	x_rules = set(range(max(x_coords))) - x_coords
+	y_space = set(range(max(y_coords))) - y_coords
+	x_space = set(range(max(x_coords))) - x_coords
 
 	new_galaxies = []
 
 	for (yy, xx) in galaxies:
-		yy_expand = sum([1 for yr in y_rules if yy > yr])
-		xx_expand = sum([1 for xr in x_rules if xx > xr])
+		y_expand = sum([yy > yr for yr in y_space]) * expand_factor
+		x_expand = sum([xx > xr for xr in x_space]) * expand_factor
 
-		yy += expand_factor * yy_expand
-		xx += expand_factor * xx_expand
-
-		new_galaxies.append((yy, xx))
+		new_galaxies.append(aoc.add_tuples( (yy, xx), (y_expand, x_expand) ))
 
 	return new_galaxies
 
@@ -34,12 +31,7 @@ def solve(x, expand_factor):
 
 	galaxies = expand(galaxies, expand_factor)
 
-	ans = 0
-	for i in range(len(galaxies)):
-		for j in range(i, len(galaxies)):
-			ans += abs(galaxies[i][0] - galaxies[j][0]) + abs(galaxies[i][1] - galaxies[j][1])
-
-	return ans
+	return sum([abs(ax-bx) + abs(ay-by) for (ax, ay), (bx, by) in itertools.combinations(galaxies, 2)])
 
 
 data = aoc.collect_input("input.txt")
