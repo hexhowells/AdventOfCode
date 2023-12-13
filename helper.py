@@ -91,6 +91,12 @@ class Grid:
 		return [(r, c) for (r, c) in self.all_points() if self.grid[r][c] == symbol]
 
 
+	def transpose(self):
+		self.grid = list(map(list, zip(*self.grid)))
+		self.height = len(self.grid)
+		self.width = len(self.grid[0])
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
