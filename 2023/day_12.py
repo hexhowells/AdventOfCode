@@ -19,15 +19,17 @@ def num_configs(seq, rules):
 		return seq.count('#') == 0
 
 	if seq[0] == '#':
+		# not enough symbols left or next N symbols contain a '.'
 		if len(seq) < rules[0] or '.' in seq[:rules[0]]:
 			return 0
+		# exactally N symbols remain
 		elif len(seq) == rules[0]: 
 			return len(rules) == 1
+		# A '#' symbol exists after the sequence of len N symbols
 		elif seq[rules[0]] == '#':
 			return 0
-		elif len(seq) == rules[0]: 
-			return len(rules) == 1
 
+		# rules still remain continue
 		return num_configs(seq[rules[0]+1:], rules[1:])
 
 	return num_configs('#' + seq[1:], rules) + num_configs(seq[1:], rules)
