@@ -97,6 +97,11 @@ class Grid:
 		self.width = len(self.grid[0])
 
 
+	def rotate_90(self):
+		self.grid = self.grid[::-1]
+		self.transpose()
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
