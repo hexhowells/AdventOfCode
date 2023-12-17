@@ -14,14 +14,17 @@ def get_neighbours(grid, point):
 	if point in neighbours_mem: return neighbours_mem[point]
 
 	(r, c) = point
-	neighbour_cells = [(r-1, c), (r, c+1), (r+1, c), (r, c-1)]
+	neighbour_cells = [
+		((r-1, c), 'N'), 
+		((r, c+1), 'E'), 
+		((r+1, c), 'S'), 
+		((r, c-1), 'W')
+		]
 
-	n = []
-	for (r, c), direc in zip(neighbour_cells, ['N', 'E', 'S', 'W']):
-		if grid.valid(r, c):
-			n.append( ((r, c), direc) )
+	n = [( (r,c),d ) for (r,c),d in neighbour_cells if grid.valid(r, c)]
 
 	neighbours_mem[point] = n
+	
 	return n
 
 
@@ -36,7 +39,7 @@ def dijkstra(grid, start, goal, p2=False):
 
 		if curr_point == goal: return curr_cost
 
-		key = (curr_point[0], curr_point[1], curr_direc, curr_count)
+		key = (curr_point, curr_direc, curr_count)
 		if key in distances: continue
 		distances[key] = curr_cost
 
