@@ -8,13 +8,11 @@ import aoc
 import heapq
 
 
-def all_points(grid):
-    for r in range(grid.height):
-        for c in range(grid.width):
-            yield (r, c)
-
+neighbours_mem = {}
 
 def get_neighbours(grid, point):
+	if point in neighbours_mem: return neighbours_mem[point]
+
 	(r, c) = point
 	neighbour_cells = [(r-1, c), (r, c+1), (r+1, c), (r, c-1)]
 
@@ -23,6 +21,7 @@ def get_neighbours(grid, point):
 		if grid.valid(r, c):
 			n.append( ((r, c), direc) )
 
+	neighbours_mem[point] = n
 	return n
 
 
