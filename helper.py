@@ -1,4 +1,6 @@
 import re
+from collections import *
+import heapq
 
 
 def collect_input(filename):
@@ -136,6 +138,75 @@ def picks_theorem(inner_points, border_points):
 		A = I + B/2 - 1
 	"""
 	return inner_points + (border_points / 2) - 1
+
+
+def manhattan_dist(a, b):
+	return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+def BFS(grid, start):
+	seen = set()
+	q = deque([start])
+
+	while q:
+		node = q.popleft()
+		if node not in seen:
+			seen.add(node)
+			q.extend([n for n in grid.get_neighbours(node) if n not in seen])
+
+	return seen
+
+
+def DFS(grid, start):
+	seen = set()
+	q = [start]
+
+	while q:
+		node = q.pop()
+		if node not in seen:
+			seen.add(node)
+			q.extend([n for n in grid.get_neighbours(node) if n not in seen])
+
+	return seen
+
+
+def floyd_warshall(nV, grid):
+	"""
+	nV = number of verticies
+	"""
+	distance = list(map(  lambda i: list(map(lambda j: j, i)), grid  ))
+
+	for k in range(nV):
+		for i in range(nV):
+			for j in range(nV):
+				distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
+    
+	return distance
+
+
+def dijkstra(grid, start, goal):
+	distances = {node: float('infinity') for node in grid.all_points()}
+	distances[start] = 0
+
+	pq = [(0, start)]
+
+	while pq:
+		curr_dist, curr_node = heapq.heappop(pq)
+
+		if curr_node == goal:
+			return curr_dist
+
+		if curr_dist > distances[curr_node]:
+			continue
+
+		for n in grid.get_neighbours(curr_node):
+			dist = curr_dist + grid.get(n)
+
+			if dist < distances[n]:
+				distances[n] = dist
+				heapq.heappush(pq, (dist, n))
+
+	return -1
 
 	
 acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
