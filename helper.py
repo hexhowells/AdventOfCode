@@ -129,6 +129,14 @@ def shoelace_formula(coords):
 
 	return abs(area) // 2
 
+
+def picks_theorem(inner_points, border_points):
+	"""
+	Find area of shape using
+		A = I + B/2 - 1
+	"""
+	return inner_points + (border_points / 2) - 1
+
 	
 acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 acc_3d = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
