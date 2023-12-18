@@ -27,7 +27,7 @@ class Grid:
 
 
 	def __str__(self):
-		return '\n'.join([''.join(line) for line in self.grid])
+		return '\n'.join([''.join(map(str,line)) for line in self.grid])
 
 
 	def get_neighbour_coords(self, point, diag=False):
@@ -116,6 +116,18 @@ def sub_tuples(a, b):
 
 def mul_tuples(a, b):
 	return tuple( [a[i] * b[i] for i in range(len(a))] )
+
+
+def shoelace_formula(coords):
+	n = len(coords)
+	area = 0
+
+	for i in range(n):
+		j = (i + 1) % n
+		area += coords[i][0] * coords[j][1]
+		area -= coords[j][0] * coords[i][1]
+
+	return abs(area) // 2
 
 	
 acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
