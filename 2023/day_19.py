@@ -86,7 +86,6 @@ def combinations(ranges):
 
 
 def part1(x):
-	ans = 0
 	rules = get_rules(x)
 	parts = []
 
@@ -98,7 +97,6 @@ def part1(x):
 
 
 def part2(x):
-	ans = 1
 	rules = get_rules(x)
 	ranges = num_valid(rules)
 
