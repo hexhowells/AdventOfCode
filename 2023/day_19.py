@@ -9,37 +9,37 @@ import operator
 import copy
 
 
-def valid(part, rules):
-	curr_rule = rules['in']
+def valid(part, workflows):
+	curr_rule = workflows['in']
 
 	while True:
 		for ch, comp, val, jmp in curr_rule:
 			if ch == -1 or comp(part[ch], val):
 				if jmp == 'A': return True
 				if jmp == 'R': return False
-				curr_rule = rules[jmp]
+				curr_rule = workflows[jmp]
 				break
 
 
-def get_rules(x):
-	rules = {}
+def get_workflows(x):
+	workflows = {}
 	ops = {'>': operator.gt, '<': operator.lt}
 
-	for rule in x[0].split('\n'):
-		name, _rules = rule.replace('}','').split('{')
+	for workflow in x[0].split('\n'):
+		name, _rules = workflow.replace('}','').split('{')
 		_rules = _rules.split(',')
-		rules[name] = []
+		workflows[name] = []
 
 		for r in _rules[:-1]:
 			ch = r[0]
 			comp = ops[r[1]]
 			val = aoc.ints(r)[0]
 			jmp = r.split(':')[1]
-			rules[name].append((ch, comp, val, jmp))
+			workflows[name].append((ch, comp, val, jmp))
 
-		rules[name].append((-1, -1, -1, _rules[-1]))
+		workflows[name].append((-1, -1, -1, _rules[-1]))
 
-	return rules
+	return workflows
 	
 
 def update_range(ranges, ch, comp, val):
@@ -52,9 +52,10 @@ def update_range(ranges, ch, comp, val):
 	return new_ranges
 
 
-def num_valid(rules):
-	_ranges = {'x': [1, 4000], 'm': [1, 4000], 'a': [1, 4000], 's': [1, 4000]}
-	stack = [(_ranges, 'in', 0)]
+def num_valid(workflows):
+	start_range = {'x': [1, 4000], 'm': [1, 4000], 'a': [1, 4000], 's': [1, 4000]}
+	#		  range,  next_workflow,  next_rule
+	stack = [(start_range, 'in', 0)]
 	ans = []
 
 	while stack:
@@ -66,7 +67,7 @@ def num_valid(rules):
 		if rule == 'R':
 			continue
 
-		ch, comp, val, jmp = rules[rule][num]
+		ch, comp, val, jmp = workflows[rule][num]
 
 		if ch == -1:
 			stack.append((ranges, jmp, 0))
@@ -86,19 +87,19 @@ def combinations(ranges):
 
 
 def part1(x):
-	rules = get_rules(x)
+	workflows = get_workflows(x)
 	parts = []
 
 	for line in x[1].split('\n'):
 		vals = aoc.ints(line)
 		parts.append({'x':vals[0], 'm':vals[1], 'a':vals[2], 's':vals[3]})
 
-	return sum([sum(part.values()) for part in parts if valid(part, rules)])
+	return sum([sum(part.values()) for part in parts if valid(part, workflows)])
 
 
 def part2(x):
-	rules = get_rules(x)
-	ranges = num_valid(rules)
+	workflows = get_workflows(x)
+	ranges = num_valid(workflows)
 
 	return combinations(ranges)
 
