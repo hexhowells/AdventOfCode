@@ -3,6 +3,8 @@ Solutions for [advent of code](https://adventofcode.com/) written in Python.
 
 Code will be cleaned up versions of the initial solutions.
 
+The write-up for my 2023 solutions can be found here: [https://hexhowells.com/posts/aoc-2023.html](https://hexhowells.com/posts/aoc-2023.html)
+
 #
 
 ```template.py``` contains my template file used for each day.
