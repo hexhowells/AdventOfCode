@@ -9,7 +9,7 @@ import aoc
 
 def valid(p, rules):
 	for i in range(1, len(p)):
-		for j in range(0, i):
+		for j in range(i):
 			if f'{p[i]}|{p[j]}' in rules: return False
 		
 	return True
@@ -17,7 +17,7 @@ def valid(p, rules):
 
 def fix(p, rules):
 	for i in range(1, len(p)):
-		for j in range(0, i):
+		for j in range(i):
 			if f'{p[i]}|{p[j]}' in rules:
 				p.insert(j, p.pop(i))
 
