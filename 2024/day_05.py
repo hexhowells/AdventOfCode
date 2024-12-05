@@ -32,10 +32,10 @@ def solve(x):
 
 	for p in pages:
 		if valid(p, rules):
-			p1 += p[(len(p) - 1) // 2]
+			p1 += p[(len(p)) // 2]
 		else:
 			fix(p, rules)
-			p2 += p[(len(p) - 1) // 2]
+			p2 += p[(len(p)) // 2]
 
 	return p1, p2
 
