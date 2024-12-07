@@ -12,18 +12,14 @@ mul = lambda a, b: a * b
 pipe = lambda a, b: int(str(a) + str(b))
 
 
-def compute(nums, ops):
-	acc = nums[0]
+def check(seq, ops, ans):
+	if len(seq) == 1: return seq[0] == ans
 
-	for i, op in enumerate(ops):
-		acc = op(acc, nums[i+1])
+	if seq[0] > ans: return False
 
-	return acc
-
-
-def check(test_value, nums, symbols):
-	for combo in itertools.product(symbols, repeat=len(nums) - 1):
-		if compute(nums, combo) == test_value:
+	for op in ops:
+		a, b, *rest = seq
+		if check([op(a, b)] + rest, ops, ans):
 			return True
 
 	return False
@@ -35,10 +31,10 @@ def solve(x):
 	for line in x:
 		test_value, *nums = aoc.ints(line)
 		
-		if check(test_value, nums, [add, mul]):
+		if check(nums, [add, mul], test_value):
 			p1 += test_value
 			p2 += test_value
-		elif check(test_value, nums, [add, mul, pipe]):
+		elif check(nums, [add, mul, pipe], test_value):
 			p2 += test_value
 
 	return p1, p2
