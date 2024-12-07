@@ -33,9 +33,7 @@ def solve(x):
 	p1, p2 = 0, 0
 
 	for line in x:
-		ints = aoc.ints(line)
-		test_value = ints[0]
-		ops = ints[1:]
+		test_value, *ops = aoc.ints(line)
 		
 		if check(test_value, ops, [add, mul]):
 			p1 += test_value
