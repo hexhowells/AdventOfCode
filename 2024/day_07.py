@@ -21,9 +21,9 @@ def compute(nums, ops):
 	return acc
 
 
-def check(test_value, ops, symbols):
-	for combo in itertools.product(symbols, repeat=len(ops) - 1):
-		if compute(ops, combo) == test_value:
+def check(test_value, nums, symbols):
+	for combo in itertools.product(symbols, repeat=len(nums) - 1):
+		if compute(nums, combo) == test_value:
 			return True
 
 	return False
@@ -33,12 +33,12 @@ def solve(x):
 	p1, p2 = 0, 0
 
 	for line in x:
-		test_value, *ops = aoc.ints(line)
+		test_value, *nums = aoc.ints(line)
 		
-		if check(test_value, ops, [add, mul]):
+		if check(test_value, nums, [add, mul]):
 			p1 += test_value
 			p2 += test_value
-		elif check(test_value, ops, [add, mul, pipe]):
+		elif check(test_value, nums, [add, mul, pipe]):
 			p2 += test_value
 
 	return p1, p2
