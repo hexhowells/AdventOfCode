@@ -16,6 +16,9 @@ class Grid:
 		self.grid = [[cell_type(a) for a in list(line)] for line in x]
 		self.height = len(self.grid)
 		self.width = len(self.grid[0])
+		self.h = self.height
+		self.w = self.width
+		self.area = self.height * self.width
 
 
 	def __getitem__(self, x):
@@ -152,7 +155,7 @@ def BFS(grid, start):
 		node = q.popleft()
 		if node not in seen:
 			seen.add(node)
-			q.extend([n for n in grid.get_neighbours(node) if n not in seen])
+			q.extend([n for n in grid.get_neighbour_coords(node) if n not in seen])
 
 	return seen
 
@@ -165,7 +168,7 @@ def DFS(grid, start):
 		node = q.pop()
 		if node not in seen:
 			seen.add(node)
-			q.extend([n for n in grid.get_neighbours(node) if n not in seen])
+			q.extend([n for n in grid.get_neighbour_coords(node) if n not in seen])
 
 	return seen
 
@@ -212,10 +215,15 @@ def dijkstra(grid, start, goal):
 acc_2d = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 acc_3d = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
 
+#move = {'^': (-1, 0), 'v': (1, 0), '>': (0, 1), '<': (0, -1)}
+#turn = {'^': '>', 'v':'<', '>':'v', '<': '^'}
 
-def ints(x):
-	return [int(num) for num in re.findall("[-\d]+", x)]
 
+def ints(x, neg=True):
+	if neg:
+		return [int(num) for num in re.findall("[-\d]+", x)]
+	else:
+		return [int(num) for num in re.findall("[\d]+", x)]
 
 def digits(x, neg=False):
 	if neg:
