@@ -3,6 +3,8 @@ import math
 #import numpy as np
 from timeit import default_timer as timer
 import itertools
+from functools import cache
+from tqdm import tqdm
 import pyperclip
 import aoc
 
