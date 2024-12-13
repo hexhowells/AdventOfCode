@@ -10,7 +10,7 @@ import aoc
 from z3 import Solver, Int, sat
 
 
-def solve(ax, ay, bx, by, px, py):
+def sat_solve(ax, ay, bx, by, px, py):
 	a_pushes = Int('a_pushes')
 	b_pushes = Int('b_pushes')	
 
@@ -28,12 +28,24 @@ def solve(ax, ay, bx, by, px, py):
 	return 0, 0
 
 
+def solve(ax, ay, bx, by, px, py):
+	det = ax*by - ay*bx
+	A = (by*px - bx*py) / det
+	B = (ax*py - ay*px) / det
+
+	if int(A) == A and int(B) == B:
+		return int(A), int(B)
+	else:
+		return 0, 0
+
+
 def part1(x):
 	ans = 0
 
 	for line in x:
 		ax, ay, bx, by, px, py = aoc.ints(line)
 
+		#ans_a, ans_b = sat_solve(ax, ay, bx, by, px, py)
 		ans_a, ans_b = solve(ax, ay, bx, by, px, py)
 		ans += ans_a*3 + ans_b
 
@@ -46,6 +58,7 @@ def part2(x):
 	for line in x:
 		ax, ay, bx, by, px, py = aoc.ints(line)
 
+		#ans_a, ans_b = sat_solve(ax, ay, bx, by, 10000000000000+px, 10000000000000+py)
 		ans_a, ans_b = solve(ax, ay, bx, by, 10000000000000+px, 10000000000000+py)
 		ans += ans_a*3 + ans_b
 
