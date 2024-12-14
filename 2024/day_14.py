@@ -10,10 +10,10 @@ import aoc
 import time
 
 
-def tree(points, width=33):
+def tree(points, width=31):
 	# group points by row
 	rows = defaultdict(list)
-	for r, c, _, _ in points:
+	for c, r, _, _ in points:
 		rows[r].append(c)
 
 	# check each row for a horizontal line of the given width
