@@ -187,6 +187,20 @@ def DFS(grid, start):
 	return seen
 
 
+def flood_fill(grid, p):
+	seen = set()
+	q = deque([p])
+	value = grid.get(p)
+
+	while q:
+		node = q.popleft()
+		if grid.get(node) == value and node not in seen:
+			seen.add(node)
+			q.extend([n for n in grid.get_neighbour_coords(node) if n not in seen])
+
+	return seen
+
+
 def floyd_warshall(nV, grid):
 	"""
 	nV = number of verticies
