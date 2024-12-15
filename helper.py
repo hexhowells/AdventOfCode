@@ -111,14 +111,23 @@ class Grid:
 		return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
 
-	def rows(self):
-		for row in self.grid:
-			yield row
+	def rows(self, coords=False):
+		if coords:
+			for r in range(self.width):
+				yield [(r, c) for c in range(self.height)]
+		else:
+			for row in self.grid:
+				yield row
 
 
-	def cols(self):
-		for col in zip(*self.grid):
-			yield list(col)
+	def cols(self, coords=False):
+		if coords:
+			for c in range(self.height):
+				yield [(r, c) for r in range(self.width)]
+		else:
+			for col in zip(*self.grid):
+				yield list(col)
+
 
 
 def triangle(n):
