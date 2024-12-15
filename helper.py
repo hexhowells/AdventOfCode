@@ -111,6 +111,16 @@ class Grid:
 		return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
 
+	def rows(self):
+		for row in self.grid:
+			yield row
+
+
+	def cols(self):
+		for col in zip(*self.grid):
+			yield list(col)
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
