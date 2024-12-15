@@ -39,30 +39,6 @@ def move_robot_p1(pos, grid, m):
 	return move, grid
 
 
-def part1(x):
-	grid = aoc.Grid(x[0].split('\n'))
-	moves = list(x[1].replace('\n', ''))
-
-	move = {'^': (-1, 0), 'v': (1, 0), '>': (0, 1), '<': (0, -1)}
-
-	pos = grid.find("@")[0]
-	grid.set(pos, '.')
-
-	for m in moves:
-		new_pos = aoc.add_tuples(pos, move[m])
-
-		match grid.get(new_pos):
-			case '.':
-				pos = new_pos
-			case '#':
-				continue
-			case 'O':
-				player_moves, grid = move_robot_p1(new_pos, grid, move[m])
-				if player_moves: pos = new_pos
-
-	return sum([100 * r + c for (r, c) in grid.find('O')])
-
-
 def move_ud(grid, pos, m):
 	rem_robots, new_robots = [], []
 	q = [pos]
@@ -167,6 +143,30 @@ def show_grid(grid, pos):
 	grid.set(pos, '@')
 	print(grid)
 	grid.set(pos, '.')
+
+
+def part1(x):
+	grid = aoc.Grid(x[0].split('\n'))
+	moves = list(x[1].replace('\n', ''))
+
+	move = {'^': (-1, 0), 'v': (1, 0), '>': (0, 1), '<': (0, -1)}
+
+	pos = grid.find("@")[0]
+	grid.set(pos, '.')
+
+	for m in moves:
+		new_pos = aoc.add_tuples(pos, move[m])
+
+		match grid.get(new_pos):
+			case '.':
+				pos = new_pos
+			case '#':
+				continue
+			case 'O':
+				player_moves, grid = move_robot_p1(new_pos, grid, move[m])
+				if player_moves: pos = new_pos
+
+	return sum([100 * r + c for (r, c) in grid.find('O')])
 
 
 def part2(x):
