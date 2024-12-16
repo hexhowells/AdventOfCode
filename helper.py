@@ -239,7 +239,11 @@ def dijkstra(grid, start, goal):
 		if curr_dist > distances[curr_node]:
 			continue
 
-		for n in grid.get_neighbours(curr_node):
+		for n in grid.get_neighbour_coords(curr_node):
+			# avoid walls
+			if grid.get(n) == '#': 
+				continue
+
 			dist = curr_dist + grid.get(n)
 
 			if dist < distances[n]:
