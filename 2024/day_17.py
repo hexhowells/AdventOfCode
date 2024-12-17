@@ -98,8 +98,7 @@ def part2(x):
 	program = aoc.ints(x[1])
 
 	stack = [(a, 0) for a in range(8)]
-	results = []
-
+	
 	while stack:
 		A, idx = stack.pop()
 
@@ -115,7 +114,6 @@ def part2(x):
 			num = f'{A:03b}{next_A:03b}'
 			stack.append( (int(num, 2), idx + 1) )
 
-	return results
 
 
 data = aoc.collect_input("input.txt")
