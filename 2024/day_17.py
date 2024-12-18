@@ -37,7 +37,7 @@ def get_combo(oprand, registers):
 			print("Invalid combo operand")
 
 
-def run_ins(opcode, oprand, ptr, registers):
+def step(opcode, oprand, ptr, registers):
 	jmp = False
 	output = None
 
@@ -79,7 +79,7 @@ def run(program, A):
 
 	while ptr < len(program)-1:
 		opcode, oprand = program[ptr], program[ptr+1]
-		ptr, registers, output = run_ins(opcode, oprand, ptr, registers)
+		ptr, registers, output = step(opcode, oprand, ptr, registers)
 
 		if output is not None:
 			outputs.append(output)
@@ -97,20 +97,20 @@ def part1(x):
 def part2(x):
 	program = aoc.ints(x[1])
 
-	stack = [(a, 0) for a in range(8)]
+	stack = [(a, 0) for a in range(8-1, -1, -1)]
 	
 	while stack:
 		A, idx = stack.pop()
 
 		output = run(program, A)
 
-		if output[-(idx+1)] != program[-(idx+1)]:
+		if (idx >= len(output)) or (output[-(idx+1)] != program[-(idx+1)]):
 			continue
 
 		if idx == len(program) - 1:
 			return A
 		
-		for next_A in range(8):
+		for next_A in range(8-1, -1, -1):
 			num = f'{A:03b}{next_A:03b}'
 			stack.append( (int(num, 2), idx + 1) )
 
