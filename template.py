@@ -4,6 +4,7 @@ import math
 from timeit import default_timer as timer
 import itertools
 from functools import cache
+import heapq
 from tqdm import tqdm
 import pyperclip
 import aoc
