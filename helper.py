@@ -130,6 +130,10 @@ class Grid:
 
 
 
+def gen_grid(height, width, symbol):
+	return [[symbol] * width] * height
+
+
 def triangle(n):
 	return n * (n + 1) // 2
 
