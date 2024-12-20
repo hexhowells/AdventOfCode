@@ -245,8 +245,8 @@ def dijkstra(grid, start, goal):
 
 		for n in grid.get_neighbour_coords(curr_node):
 			# avoid walls
-			if grid.get(n) == '#': 
-				continue
+			#if grid.get(n) == '#': 
+			#	continue
 
 			dist = curr_dist + grid.get(n)
 
