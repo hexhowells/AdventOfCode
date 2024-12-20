@@ -174,6 +174,25 @@ def manhattan_dist(a, b):
 	return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
+def BFS(grid, start, end):
+	seen = set()
+	q = deque([(start, [])])
+
+	while q:
+		node, path = q.popleft()
+
+		if node == end:
+			return path+[end]
+
+		if node not in seen:
+			seen.add(node)
+			for n in grid.get_neighbour_coords(node):
+				if n not in seen and grid.get(n) != '#':
+					q.append((n, path+[node]))
+
+	return []
+
+
 def BFS(grid, start):
 	seen = set()
 	q = deque([start])
