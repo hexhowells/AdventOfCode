@@ -15,14 +15,26 @@ import aoc
 # X = set of verticies already processed
 
 
-def find_triangles(r, p, x, graph, triangles):
-	if len(r) == 3:
-		triangles.append(r)
+# def find_triangles(r, p, x, graph, triangles):
+# 	if len(r) == 3:
+# 		triangles.append(r)
 
-	for v in list(p):
-		find_triangles(r | {v}, p & graph[v], x & graph[v], graph, triangles)
-		p.remove(v)
-		x.add(v)
+# 	for v in list(p):
+# 		find_triangles(r | {v}, p & graph[v], x & graph[v], graph, triangles)
+# 		p.remove(v)
+# 		x.add(v)
+
+
+def get_triangles(graph):
+	triangles = set()
+
+	for v in graph.keys():
+		for vv in graph[v]:
+			for vvv in graph[vv]:
+				if vvv in graph[v]:
+					triangles.add( tuple(sorted([v, vv, vvv])) )
+
+	return triangles
 
 
 def bron_kerbosch(r, p, x, graph):
@@ -54,8 +66,7 @@ def part1(x):
 	edges = [n.split('-') for n in x]
 	graph = make_graph(edges)
 	
-	triangles = []
-	find_triangles(set(), set(graph.keys()), set(), graph, triangles)
+	triangles = get_triangles(graph)
 
 	return sum(1 for t in triangles if any(n[0] == 't' for n in t))
 
