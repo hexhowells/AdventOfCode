@@ -129,6 +129,20 @@ class Grid:
 				yield list(col)
 
 
+	def fill(self, p):
+		seen = set()
+		q = deque([p])
+		value = self.get(p)
+
+		while q:
+			node = q.popleft()
+			if self.get(node) == value and node not in seen:
+				seen.add(node)
+				q.extend([n for n in self.get_neighbour_coords(node) if n not in seen])
+
+		return seen
+
+
 
 def gen_grid(height, width, symbol):
 	return [[symbol] * width] * height
