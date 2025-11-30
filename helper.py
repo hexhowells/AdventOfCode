@@ -19,6 +19,7 @@ class Grid:
 		self.h = self.height
 		self.w = self.width
 		self.area = self.height * self.width
+		self.size = (self.w, self.h)
 
 
 	def __getitem__(self, x):
