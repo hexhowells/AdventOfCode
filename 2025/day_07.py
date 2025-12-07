@@ -57,6 +57,20 @@ def part2(x):
 	return search(m, s)
 
 
+def solve(x):
+	row = [0] * len(x[0])
+	row[x[0].index('S')] = 1
+	p1 = 0
+
+	for r in x[1:]:
+		for i in [i for i, s in enumerate(r) if s == '^']:
+			for acc in (-1, 1): row[i+acc] += row[i]
+			if row[i] != 0: p1 += 1
+			row[i] = 0
+	
+	return p1, sum(row)
+
+
 data = aoc.collect_input("input.txt")
 #data = aoc.collect_input("test_input.txt")
 
